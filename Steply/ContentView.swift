@@ -1,25 +1,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var stepData = StepData()
-
+    @State private var viewModel = StepViewModel()
+    
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem {
+            HomeView(viewModel: viewModel)                .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
-            AwardsView()
+            
+            AwardsView(viewModel: viewModel)
                 .tabItem {
                     Label("Awards", systemImage: "trophy.fill")
                 }
-            SettingsView()
+            
+            SettingsView(viewModel: viewModel)
                 .tabItem {
                     Label("Settings", systemImage: "slider.horizontal.3")
                 }
         }
         .tint(.indigo)
-        .environment(stepData)
     }
 }
 
