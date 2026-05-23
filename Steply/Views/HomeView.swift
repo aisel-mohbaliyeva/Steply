@@ -1,28 +1,15 @@
-//
-//  HomeView.swift
-//  Steply
-//
-//  Created by Aysel Mohbaliyeva on 22.05.26.
-//
-
 import SwiftUI
 
 struct HomeView: View {
-    
     var viewModel: StepViewModel
+    
     var body: some View {
-        
         ScrollView {
             VStack(spacing: 24) {
-                
                 headerSection
-                
                 progressSection
-                
                 statsSection
-                
                 weeklySection
-                
             }
             .padding()
         }
@@ -36,13 +23,27 @@ struct HomeView: View {
     
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Today")
+            Text(greeting)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             Text("\(viewModel.todaySteps.formatted()) steps")
                 .font(.system(size: 36, weight: .bold))
+            
+            if viewModel.goalReached {
+                Text("Goal reached! Amazing job!")
+                    .font(.caption)
+                    .foregroundStyle(.indigo)
+                    .fontWeight(.medium)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var greeting: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        if hour < 12 { return "Good morning" }
+        if hour < 18 { return "Good afternoon" }
+        return "Good evening"
     }
     
     // MARK: - Progress Ring

@@ -11,7 +11,7 @@ import SwiftUI
 struct SteplyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }

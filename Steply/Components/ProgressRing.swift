@@ -11,19 +11,28 @@ struct ProgressRing: View {
     let progress: Double
     let lineWidth: CGFloat
     
+    private var gradient: AngularGradient {
+        AngularGradient(
+            colors: [.indigo, .purple, .indigo],
+            center: .center,
+            startAngle: .degrees(-90),
+            endAngle: .degrees(270)
+        )
+    }
+    
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.indigo.opacity(0.15), lineWidth: lineWidth)
+                .stroke(Color.indigo.opacity(0.1), lineWidth: lineWidth)
             
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
-                    Color.indigo,
+                    gradient,
                     style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeOut(duration: 0.8), value: progress)
+                .animation(.easeOut(duration: 1.0), value: progress)
         }
     }
 }
